@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# install-github-copilot.sh — install GitHub Copilot extension for VS Code
+npm install -g @github/copilot-cli
+copilot-cli install-vscode-extension   
+echo "GitHub Copilot extension installed for VS Code."
+exit 0
+
+
