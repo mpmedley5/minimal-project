@@ -10,6 +10,14 @@
 
 ## Single global variable for all stored data
 
+import json
+import os
+from datetime import datetime
+from uuid import uuid4
+
+# File path for persistent Q&A storage
+QA_FILE = "qa_conversations.json"
+
 # Single global variable holding all in-memory data for this prototype
 APP_STATE = {
     "domains": [
@@ -22,8 +30,29 @@ APP_STATE = {
         "CompTIA CySA+",
    ],
     "current_domain": None,
-    "saved_qa_pairs": []
+    "conversations": []
 }
+
+
+def load_conversations() -> None:
+    """Load conversations from JSON file into APP_STATE."""
+    if os.path.exists(QA_FILE):
+        try:
+            with open(QA_FILE, 'r') as f:
+                APP_STATE["conversations"] = json.load(f)
+        except (json.JSONDecodeError, IOError):
+            APP_STATE["conversations"] = []
+    else:
+        APP_STATE["conversations"] = []
+
+
+def save_conversations() -> None:
+    """Save current conversations from APP_STATE to JSON file."""
+    try:
+        with open(QA_FILE, 'w') as f:
+            json.dump(APP_STATE["conversations"], f, indent=2)
+    except IOError as e:
+        print(f"Error saving conversations: {e}")
 
 def show_chatbot_invitation() -> None:
     """Display the chatbot invitation after domain selection."""
@@ -50,23 +79,29 @@ def start_chat_session() -> None:
             break
         elif user_input.lower() == "save":
             if last_question and last_answer:
-                APP_STATE["saved_qa_pairs"].append({
+                # Create structured Q&A record
+                qa_record = {
+                    "id": str(uuid4()),
                     "question": last_question,
-                    "answer": last_answer,
+                    "response": last_answer,
+                    "timestamp": datetime.now().isoformat(),
                     "domain": APP_STATE["current_domain"]
-                })
+                }
+                APP_STATE["conversations"].append(qa_record)
+                save_conversations()
                 print(f"✓ Saved: '{last_question}'\n")
             else:
                 print("No Q&A pair to save yet. Ask a question first.\n")
             continue
         elif user_input.lower() == "list":
-            if APP_STATE["saved_qa_pairs"]:
-                recent_pairs = APP_STATE["saved_qa_pairs"][-10:]
+            if APP_STATE["conversations"]:
+                recent_pairs = APP_STATE["conversations"][-10:]
                 print("\n=== Last 10 Saved Q&A Pairs ===")
                 for i, pair in enumerate(recent_pairs, start=1):
                     print(f"\n{i}. [{pair['domain']}]")
                     print(f"   Q: {pair['question']}")
-                    print(f"   A: {pair['answer']}")
+                    print(f"   A: {pair['response']}")
+                    print(f"   Saved: {pair['timestamp']}")
                 print("\n=== End of List ===\n")
             else:
                 print("No saved Q&A pairs yet.\n")
@@ -136,6 +171,9 @@ def show_menu() -> None:
 
 def main() -> None:
     """Main program loop."""
+    # Load conversations from persistent storage at startup
+    load_conversations()
+    
     print("Command-Line Application Prototype - Domain Selector")
 
     while True:
