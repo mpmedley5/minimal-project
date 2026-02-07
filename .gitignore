@@ -7,4 +7,5 @@ venv/
 .venv/
 dist/
 build/
-*.egg-info/qa_conversations.json
+*.egg-info/
+data.json
