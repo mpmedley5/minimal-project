@@ -15,8 +15,8 @@ import os
 from datetime import datetime
 from uuid import uuid4
 
-# File path for persistent Q&A storage (assignment requires data.json)
-QA_FILE = "data.json"
+# File path for persistent Q&A storage
+QA_FILE = "qa_conversations.json"
 
 # File path for per-domain sample data
 DOMAIN_DATA_FILE = "domain_data.json"
