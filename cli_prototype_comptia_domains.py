@@ -18,6 +18,9 @@ from uuid import uuid4
 # File path for persistent Q&A storage
 QA_FILE = "qa_conversations.json"
 
+# File path for per-domain sample data
+DOMAIN_DATA_FILE = "domain_data.json"
+
 # Single global variable holding all in-memory data for this prototype
 APP_STATE = {
     "domains": [
@@ -30,7 +33,8 @@ APP_STATE = {
         "CompTIA CySA+",
    ],
     "current_domain": None,
-    "conversations": []
+    "conversations": [],
+    "domain_data": {}
 }
 
 
@@ -54,6 +58,18 @@ def save_conversations() -> None:
     except IOError as e:
         print(f"Error saving conversations: {e}")
 
+
+def load_domain_data() -> None:
+    """Load per-domain sample data from JSON file into APP_STATE."""
+    if os.path.exists(DOMAIN_DATA_FILE):
+        try:
+            with open(DOMAIN_DATA_FILE, 'r') as f:
+                APP_STATE["domain_data"] = json.load(f)
+        except (json.JSONDecodeError, IOError):
+            APP_STATE["domain_data"] = {}
+    else:
+        APP_STATE["domain_data"] = {}
+
 def show_chatbot_invitation() -> None:
     """Display the chatbot invitation after domain selection."""
     print(f"\nYou can ask me questions about: {APP_STATE['current_domain']}\n")
@@ -72,7 +88,17 @@ def start_chat_session() -> None:
     
     while True:
         user_input = input("You: ").strip()
-        
+
+        # Special: domain knowledge query
+        if user_input and user_input.lower().strip().startswith("what do you know"):
+            domain = APP_STATE.get("current_domain")
+            info = APP_STATE.get("domain_data", {}).get(domain)
+            if info:
+                print(f"Newman: Here is what I know about {domain}: {info}\n")
+            else:
+                print("Newman: I don't have stored information for this domain yet.\n")
+            continue
+
         # Handle special commands
         if user_input.lower() == "exit":
             print("\nReturning to main menu...\n")
@@ -171,8 +197,9 @@ def show_menu() -> None:
 
 def main() -> None:
     """Main program loop."""
-    # Load conversations from persistent storage at startup
+    # Load conversations and domain data from persistent storage at startup
     load_conversations()
+    load_domain_data()
     
     print("Command-Line Application Prototype - Domain Selector")
 

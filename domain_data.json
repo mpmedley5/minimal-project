@@ -1,0 +1,9 @@
+{
+  "CompTIA A+ Hardware": "Basic hardware components: CPU, RAM, storage, motherboards.",
+  "CompTIA A+ Software": "Operating systems fundamentals: installation, drivers, OS troubleshooting.",
+  "CompTIA Network+": "Networking basics: IP addressing, routing, switching, protocols.",
+  "CompTIA Security+": "Security fundamentals: threats, mitigation, access control, cryptography.",
+  "CompTIA Linux+": "Linux basics: shell, file permissions, package management.",
+  "CompTIA Pentest+": "Pentesting overview: reconnaissance, scanning, exploitation techniques.",
+  "CompTIA CySA+": "Cybersecurity analytics: monitoring, threat detection, incident response."
+}
