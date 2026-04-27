@@ -560,6 +560,14 @@ def logout():
     return redirect('/login')
 
 
+@app.route("/init-db")
+def init_db():
+    from models import db
+    with app.app_context():
+        db.create_all()
+    return "Database initialized!"
+
+
 @app.route("/")
 @login_required
 def index():
