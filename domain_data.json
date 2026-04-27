@@ -65,7 +65,7 @@
     "answer": "Dual-channel memory uses two RAM modules simultaneously to increase memory bandwidth and improve performance."
   },
   {
-    "domain": "CompTIA A+ Hardware",
+    "CompTIA A+ Hardware": "CompTIA A+ Hardware",
     "question": "What is a heatsink?",
     "answer": "A heatsink dissipates heat from components like the CPU and GPU to maintain safe operating temperatures."
   },
