@@ -13,6 +13,10 @@ import os
 from datetime import datetime, timedelta
 from uuid import uuid4
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 # Work around newer werkzeug releases which no longer expose __version__
 # (Flask's test client attempts to read it). Add a synthetic value if missing.
 import werkzeug
@@ -52,9 +56,7 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 # Initialize SQLAlchemy with the app
 db.init_app(app)
 
-# Create database tables
-with app.app_context():
-    db.create_all()
+# Database tables will be created when the app starts (see below)
 
 # File paths for data persistence (legacy - to be deprecated)
 QA_FILE = "qa_conversations.json"  # legacy storage, still around
