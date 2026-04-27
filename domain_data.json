@@ -1,4 +1,5 @@
-exit{
+[
+{
     "domain": "CompTIA A+ Hardware",
     "question": "What is the function of a CPU?",
     "answer": "The CPU executes instructions and processes data. It is the primary component responsible for running programs and controlling system operations."
@@ -81,3 +82,4 @@ exit{
   "CompTIA Pentest+": "Pentesting overview: reconnaissance, scanning, exploitation techniques.",
   "CompTIA CySA+": "Cybersecurity analytics: monitoring, threat detection, incident response."
 }
+]
