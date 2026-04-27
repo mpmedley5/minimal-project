@@ -34,19 +34,20 @@ from models import db, User, ChatSession, Message
 app = Flask(__name__)
 
 # Load configuration from environment variables
-# SECRET_KEY: Must be set in production via environment, uses safe default for development
-SECRET_KEY = os.getenv('SECRET_KEY')
-if not SECRET_KEY:
-    if os.environ.get('FLASK_ENV') == 'production':
-        raise ValueError('SECRET_KEY environment variable must be set in production')
-    SECRET_KEY = 'dev-secret-key-change-in-production'
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key')
 
-db_url = os.getenv("DATABASE_URL", 'sqlite:///project.db')
-if db_url and db_url.startswith("postgres://"):
-    db_url = db_url.replace("postgres://", "postgresql://", 1)
+db_url = os.getenv("DATABASE_URL")
+if db_url:
+    # Fix Render/Postgres URL for SQLAlchemy psycopg driver
+    if db_url.startswith("postgres://"):
+        db_url = db_url.replace("postgres://", "postgresql+psycopg://", 1)
+    elif db_url.startswith("postgresql://"):
+        db_url = db_url.replace("postgresql://", "postgresql+psycopg://", 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+else:
+    # Local development fallback (DO NOT REMOVE)
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///local.db"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
@@ -1080,13 +1081,6 @@ def generate_response(question, domain):
 
 
 if __name__ == "__main__":
-    # Create database tables
     with app.app_context():
         db.create_all()
-    
-    # Run the Flask development server
-    # In production, use a WSGI server like Gunicorn:
-    # gunicorn web_app:app
-    port = int(os.environ.get('PORT', 5000))
-    debug = os.environ.get('FLASK_ENV') == 'development'
-    app.run(debug=debug, host="127.0.0.1", port=port)
+    app.run(debug=True)
