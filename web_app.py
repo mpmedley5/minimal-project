@@ -32,9 +32,13 @@ app = Flask(__name__)
 # Load configuration from environment variables
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
-db_url = os.getenv("DATABASE_URL", 'sqlite:///project.db')
-if db_url and db_url.startswith("postgres://"):
-    db_url = db_url.replace("postgres://", "postgresql://", 1)
+db_url = os.getenv("DATABASE_URL")
+
+if db_url:
+    if db_url.startswith("postgres://"):
+        db_url = db_url.replace("postgres://", "postgresql+psycopg://", 1)
+    elif db_url.startswith("postgresql://"):
+        db_url = db_url.replace("postgresql://", "postgresql+psycopg://", 1)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
