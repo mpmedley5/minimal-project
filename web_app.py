@@ -503,6 +503,13 @@ def back_to_domains():
     return render_dashboard(chats, active_chat=None)
 
 
+@app.route("/init-db")
+def init_db():
+    with app.app_context():
+        db.create_all()
+    return "DB initialized!"
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     error = None
