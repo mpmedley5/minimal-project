@@ -12,3 +12,6 @@ Gunicorn==21.2.0
 
 # Environment Configuration
 python-dotenv==1.0.0
+
+# PostgreSQL Database Driver
+psycopg2-binary==2.9.9
