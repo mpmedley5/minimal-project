@@ -1,5 +1,79 @@
 exit{
-  "CompTIA A+ Hardware": "Basic hardware components: CPU, RAM, storage, motherboards.",
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is the function of a CPU?",
+    "answer": "The CPU executes instructions and processes data. It is the primary component responsible for running programs and controlling system operations."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is RAM and why is it important?",
+    "answer": "RAM temporarily stores data used by active applications. It allows the CPU to quickly access information, improving system performance and multitasking."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is the difference between HDD and SSD?",
+    "answer": "HDDs use spinning disks and mechanical parts, while SSDs use flash memory. SSDs are faster, more durable, and consume less power."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is a motherboard?",
+    "answer": "The motherboard is the main circuit board that connects all hardware components and allows communication between them."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is a power supply unit?",
+    "answer": "A PSU converts electricity from a wall outlet into usable power for internal computer components."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is a GPU?",
+    "answer": "A GPU processes and renders images, video, and graphics. It is essential for gaming, video editing, and graphical workloads."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is thermal paste used for?",
+    "answer": "Thermal paste improves heat transfer between the CPU and heatsink, helping prevent overheating."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is BIOS or UEFI?",
+    "answer": "BIOS and UEFI initialize hardware during startup and load the operating system. UEFI is the modern replacement for BIOS."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is POST?",
+    "answer": "POST is a diagnostic process performed during system startup to verify hardware functionality."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is a NIC?",
+    "answer": "A Network Interface Card allows a computer to connect to a network, either through Ethernet or Wi-Fi."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is a form factor?",
+    "answer": "Form factor refers to the physical size and layout of components such as motherboards and power supplies, affecting compatibility."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is an M.2 drive?",
+    "answer": "An M.2 drive is a compact SSD that connects directly to the motherboard and often uses NVMe for high-speed performance."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is dual-channel memory?",
+    "answer": "Dual-channel memory uses two RAM modules simultaneously to increase memory bandwidth and improve performance."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What is a heatsink?",
+    "answer": "A heatsink dissipates heat from components like the CPU and GPU to maintain safe operating temperatures."
+  },
+  {
+    "domain": "CompTIA A+ Hardware",
+    "question": "What are expansion slots?",
+    "answer": "Expansion slots, such as PCIe, allow additional hardware like GPUs or network cards to be installed in a computer."
+  }
+  {"CompTIA A+ Hardware": "Basic hardware components: CPU, RAM, storage, motherboards.",
   "CompTIA A+ Software": "Operating systems fundamentals: installation, drivers, OS troubleshooting.",
   "CompTIA Network+": "Networking basics: IP addressing, routing, switching, protocols.",
   "CompTIA Security+": "Security fundamentals: threats, mitigation, access control, cryptography.",
