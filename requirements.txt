@@ -1,1 +1,14 @@
-# Add runtime dependencies here (left empty intentionally)
+# CompTIA Domain-Scoped AI Learning Agent - Dependencies
+# Web Framework and Authentication
+Flask==2.3.0
+Werkzeug==3.1.6
+
+# Database ORM
+Flask-SQLAlchemy==2.5.1
+SQLAlchemy==1.4.46
+
+# WSGI Server for Production Deployment
+Gunicorn==21.2.0
+
+# Environment Configuration
+python-dotenv==1.0.0

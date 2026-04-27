@@ -31,6 +31,7 @@ APP_STATE = {
         "CompTIA Linux+",
         "CompTIA Pentest+",
         "CompTIA CySA+",
+        "CompTIA SecAI+",
    ],
     "current_domain": None,
     "conversations": [],

@@ -1,11 +1,31 @@
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.egg-info/
+
+# Virtual Environments
 env/
 venv/
 .venv/
+ENV/
+
+# Distribution / Packaging
 dist/
 build/
-*.egg-info/
+
+# Environment Configuration
+# IMPORTANT: Never commit local environment files with secrets
+.env
+.env.local
+.env.*.local
+
+# Database Files
+*.db
+project.db
+
+# Legacy Data Files (for local testing only)
 qa_conversations.json
+chats.json
+activity_log.json

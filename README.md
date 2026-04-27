@@ -10,12 +10,21 @@ A command-line chatbot application designed to help Information Technology stude
 
 ## Features
 
-### Core Functionality
+### Core Functionality (CLI)
 - **Domain Selection**: Students choose from 7 CompTIA domains (A+ Hardware, A+ Software, Network+, Security+, Linux+, Pentest+, CySA+)
 - **Interactive Chat**: Ask questions about selected domain content
 - **Save Conversations**: Store Q&A pairs for later review
 - **List Saved Q&As**: View last 10 saved conversations with timestamps
 - **Persistent Storage**: All conversations saved to JSON file across multiple sessions
+
+### Web Interface
+- **Flask Application** serving a Snow College‑branded study companion
+- **Student Authentication** with Snow College email requirement
+- **Domain‑scoped Chats**: create, resume, and switch only by starting new sessions
+- **Persistent Chat Sessions** stored in `chats.json` with full message history
+- **Sidebar layout** (ChatGPT‑style) listing prior chats and new‑chat controls
+- **Activity Logging** of every question/response pair for accountability
+- **Automatic domain restoration** when loading a chat
 
 ### User Commands (in Chat Mode)
 - Type a question → Newman responds
@@ -24,6 +33,30 @@ A command-line chatbot application designed to help Information Technology stude
 - `exit` → Return to main menu
 
 ## Data Model
+
+### Chat Session Record (web)
+Each saved chat is a dictionary that appears in `chats.json`:
+
+```python
+{
+    "chat_id": "uuid",
+    "user_id": "...",
+    "domain_id": "CompTIA Network+",
+    "chat_name": "Network+ chat 2026-03-03T...",
+    "created_at": "ISO timestamp",
+    "last_updated": "ISO timestamp",
+    "messages": [
+        {"message_id":"...","role":"student","content":"...","timestamp":"..."},
+        {"message_id":"...","role":"assistant","content":"...","timestamp":"..."},
+        ...
+    ]
+}
+```
+
+An optional `activity_log.json` file mirrors every interaction with
+metadata useful for later analytics (user_id, chat_id, question, response.
+
+### Q&A Conversation Record
 
 ### Q&A Conversation Record
 Each saved conversation is stored as a Python dictionary with the following fields:
@@ -105,7 +138,10 @@ python cli_prototype_comptia_domains.py
 
 ## Testing
 
-Run the persistence test to verify save/load functionality:
+### CLI Persistence
+Run the legacy persistence test to verify the command‑line chatbot stores
+Q&A pairs correctly:
+
 ```bash
 python test_persistence.py
 ```
@@ -116,6 +152,20 @@ This test:
 - Verifies the previous Q&A was loaded
 - Adds a new Q&A
 - Confirms both records exist in JSON file
+
+### Web Chat Persistence
+A separate script exercises the Flask application's session
+management and chat storage. Run it with:
+
+```bash
+python test_chat_persistence.py
+```
+
+It:
+- Registers/logs in a test user
+- Starts a new chat and asks a question
+- Logs out and logs back in
+- Verifies the chat appears in the sidebar and retains history
 
 ## Development Notes
 
