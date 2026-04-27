@@ -31,16 +31,18 @@ app = Flask(__name__)
 
 # Load configuration from environment variables
 # SECRET_KEY: Must be set in production via environment, uses safe default for development
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 if not SECRET_KEY:
     if os.environ.get('FLASK_ENV') == 'production':
         raise ValueError('SECRET_KEY environment variable must be set in production')
     SECRET_KEY = 'dev-secret-key-change-in-production'
-app.secret_key = SECRET_KEY
+app.config['SECRET_KEY'] = SECRET_KEY
 
-# Database configuration: Load DATABASE_URL from environment, fallback to SQLite for development
-DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///project.db')
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+db_url = os.getenv("DATABASE_URL", 'sqlite:///project.db')
+if db_url and db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
