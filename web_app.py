@@ -30,13 +30,7 @@ from models import db, User, ChatSession, Message
 app = Flask(__name__)
 
 # Load configuration from environment variables
-# SECRET_KEY: Must be set in production via environment, uses safe default for development
-SECRET_KEY = os.getenv('SECRET_KEY')
-if not SECRET_KEY:
-    if os.environ.get('FLASK_ENV') == 'production':
-        raise ValueError('SECRET_KEY environment variable must be set in production')
-    SECRET_KEY = 'dev-secret-key-change-in-production'
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 db_url = os.getenv("DATABASE_URL", 'sqlite:///project.db')
 if db_url and db_url.startswith("postgres://"):
