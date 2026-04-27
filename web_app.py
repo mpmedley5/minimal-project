@@ -30,15 +30,17 @@ from models import db, User, ChatSession, Message
 app = Flask(__name__)
 
 # Load configuration from environment variables
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+# SECRET_KEY: Must be set in production via environment, uses safe default for development
+SECRET_KEY = os.getenv('SECRET_KEY')
+if not SECRET_KEY:
+    if os.environ.get('FLASK_ENV') == 'production':
+        raise ValueError('SECRET_KEY environment variable must be set in production')
+    SECRET_KEY = 'dev-secret-key-change-in-production'
+app.config['SECRET_KEY'] = SECRET_KEY
 
-db_url = os.getenv("DATABASE_URL")
-
-if db_url:
-    if db_url.startswith("postgres://"):
-        db_url = db_url.replace("postgres://", "postgresql+psycopg://", 1)
-    elif db_url.startswith("postgresql://"):
-        db_url = db_url.replace("postgresql://", "postgresql+psycopg://", 1)
+db_url = os.getenv("DATABASE_URL", 'sqlite:///project.db')
+if db_url and db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -49,6 +51,10 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
 # Initialize SQLAlchemy with the app
 db.init_app(app)
+
+# Create database tables
+with app.app_context():
+    db.create_all()
 
 # File paths for data persistence (legacy - to be deprecated)
 QA_FILE = "qa_conversations.json"  # legacy storage, still around
@@ -501,13 +507,6 @@ def back_to_domains():
     user_id = session.get('user_id')
     chats = get_user_chats(user_id)
     return render_dashboard(chats, active_chat=None)
-
-
-@app.route("/init-db")
-def init_db():
-    with app.app_context():
-        db.create_all()
-    return "DB initialized!"
 
 
 @app.route('/register', methods=['GET', 'POST'])
