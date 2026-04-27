@@ -52,6 +52,10 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 # Initialize SQLAlchemy with the app
 db.init_app(app)
 
+# Create database tables
+with app.app_context():
+    db.create_all()
+
 # File paths for data persistence (legacy - to be deprecated)
 QA_FILE = "qa_conversations.json"  # legacy storage, still around
 CHATS_FILE = "chats.json"           # new structured chat sessions
