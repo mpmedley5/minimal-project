@@ -1,0 +1,172 @@
+{
+  "CompTIA Network+": {
+    "overview": "CompTIA Network+ covers networking fundamentals, OSI model, protocols, infrastructure, and security concepts essential for networking professionals.",
+    "topics": {
+      "ip_addressing": {
+        "title": "IP Addressing & Subnetting",
+        "content": "IP addresses uniquely identify devices on a network. IPv4 uses 32-bit addresses (e.g., 192.168.1.1) divided into classes. IPv6 uses 128-bit addresses for expanded address space. Subnetting divides networks into smaller segments using subnet masks (e.g., /24 represents 256 addresses). CIDR notation simplifies address representation.",
+        "keywords": ["ip", "address", "subnet", "ipv4", "ipv6", "cidr", "netmask"]
+      },
+      "osi_model": {
+        "title": "OSI Model (7 Layers)",
+        "content": "Layer 1 (Physical): Physical cables and signals. Layer 2 (Data Link): MAC addresses, switching, Ethernet. Layer 3 (Network): IP routing, routers. Layer 4 (Transport): TCP/UDP, ports. Layer 5 (Session): Session establishment. Layer 6 (Presentation): Encryption, data formatting. Layer 7 (Application): HTTP, FTP, DNS, SMTP. Understanding OSI helps troubleshoot network issues at each layer.",
+        "keywords": ["osi", "layer", "model", "physical", "data link", "network", "transport", "session", "presentation", "application"]
+      },
+      "tcp_udp": {
+        "title": "TCP vs UDP",
+        "content": "TCP (Transmission Control Protocol) is connection-oriented, reliable, and ordered. It establishes a connection before sending data and retransmits lost packets. UDP (User Datagram Protocol) is connectionless, faster, and best-effort with no delivery guarantees. TCP is used for HTTP, FTP, SMTP. UDP is used for VoIP, gaming, DNS. Choose TCP for reliability, UDP for speed.",
+        "keywords": ["tcp", "udp", "protocol", "connection", "reliable", "port"]
+      },
+      "routing": {
+        "title": "Routing & Routers",
+        "content": "Routers direct traffic between networks using routing tables. Static routing uses manually configured routes. Dynamic routing uses protocols like RIP, OSPF, BGP to automatically determine paths. Default routes handle traffic not matching specific entries. Route metrics determine path selection based on hop count, bandwidth, or other factors.",
+        "keywords": ["routing", "router", "route", "ospf", "bgp", "rip", "gateway", "default"]
+      },
+      "switching": {
+        "title": "Switching & VLANs",
+        "content": "Switches operate at Layer 2, learning MAC addresses and forwarding frames. VLANs (Virtual LANs) logically segment networks for security and performance. Trunk ports carry multiple VLAN traffic. Access ports connect end devices. Spanning Tree Protocol prevents switching loops. Port security limits MAC addresses per port.",
+        "keywords": ["switch", "vlan", "trunk", "access", "stp", "spanning tree", "mac"]
+      },
+      "dns": {
+        "title": "DNS (Domain Name System)",
+        "content": "DNS translates domain names to IP addresses. Recursive queries go to resolvers which contact authoritative servers. Zone files store records: A (IPv4), AAAA (IPv6), CNAME (aliases), MX (mail), NS (nameserver). DNS cache improves performance. DNSSEC adds security. Common port: 53.",
+        "keywords": ["dns", "domain", "name", "resolution", "zone", "record", "authoritative"]
+      },
+      "dhcp": {
+        "title": "DHCP (Dynamic Host Configuration Protocol)",
+        "content": "DHCP automatically assigns IP addresses, subnet masks, gateways, and DNS servers to clients. DORA process: Discover, Offer, Request, Acknowledge. DHCP pools define available addresses. Leases expire and renew. Static reservations ensure devices keep same IPs. Helpful for large networks. Port 67/68.",
+        "keywords": ["dhcp", "ip", "assignment", "lease", "dora", "dynamic"]
+      },
+      "network_devices": {
+        "title": "Network Devices",
+        "content": "Hub: Layer 1, broadcasts all traffic. Switch: Layer 2, learns MAC addresses. Router: Layer 3, connects networks. Firewall: Filters traffic based on rules. Proxy: Acts on behalf of clients. Load Balancer: Distributes traffic. WAP (Wireless Access Point): Provides wireless connectivity. Modem: Converts ISP signal. Each device serves specific purposes in network architecture.",
+        "keywords": ["hub", "switch", "router", "firewall", "proxy", "load", "balancer", "wap", "modem"]
+      },
+      "ethernet": {
+        "title": "Ethernet Standards",
+        "content": "Ethernet speeds: 10 Mbps (10Base-T), 100 Mbps (100Base-TX, Fast Ethernet), 1 Gbps (1000Base-T, Gigabit), 10 Gbps (10GBase-T). Cable types: Cat5e (100 Mbps), Cat6 (1 Gbps), Cat6a (10 Gbps). Fiber optic supports longer distances. Standards specified by IEEE 802.3. PoE (Power over Ethernet) supplies power through network cables.",
+        "keywords": ["ethernet", "10base", "100base", "gigabit", "cat5", "cat6", "fiber", "poe"]
+      },
+      "wireless": {
+        "title": "Wireless Networking (802.11)",
+        "content": "802.11 standards: 802.11a/b/g (legacy), 802.11n (WiFi 4), 802.11ac (WiFi 5), 802.11ax (WiFi 6). 2.4 GHz band (slower, longer range) vs 5 GHz band (faster, shorter range). SSID is network name. Security: WEP (weak), WPA (better), WPA2 (strong), WPA3 (latest). Channels reduce interference. AP placement affects coverage.",
+        "keywords": ["wireless", "wifi", "802.11", "ssid", "wpa", "channel", "access", "point"]
+      },
+      "security_basics": {
+        "title": "Network Security Basics",
+        "content": "Firewalls block unauthorized traffic. VPN (Virtual Private Network) encrypts traffic. ACL (Access Control Lists) control who accesses resources. Intrusion Detection/Prevention Systems (IDS/IPS) monitor threats. DDoS mitigation protects against attacks. Segmentation isolates critical systems. Default credentials should be changed immediately on all devices.",
+        "keywords": ["security", "firewall", "vpn", "acl", "ids", "ips", "ddos", "encryption"]
+      },
+      "network_tools": {
+        "title": "Network Troubleshooting Tools",
+        "content": "Ping tests connectivity (ICMP). Tracert/Traceroute shows path to destination. IPconfig/Ifconfig displays IP configuration. Nslookup/Dig queries DNS records. Netstat shows connections and ports. Wireshark captures and analyzes packets. Iperf tests bandwidth. ARP resolves IP to MAC addresses. These tools diagnose layer-by-layer issues.",
+        "keywords": ["ping", "tracert", "ipconfig", "nslookup", "netstat", "wireshark", "arp", "tool"]
+      },
+      "nat": {
+        "title": "Network Address Translation (NAT)",
+        "content": "NAT allows private IP addresses to communicate with external networks using a single public IP. Static NAT maps one private to one public IP. Dynamic NAT maps multiple private to pool of public IPs. PAT (Port Address Translation) maps multiple private IPs to one public IP by changing port numbers. Commonly used in home routers and firewalls to provide IP address conservation.",
+        "keywords": ["nat", "address", "translation", "private", "public", "pat", "port"]
+      },
+      "vpn": {
+        "title": "Virtual Private Network (VPN)",
+        "content": "VPN creates secure encrypted tunnels over public networks. Provides confidentiality, integrity, and authentication. Types: Site-to-Site VPN connects entire networks. Client-to-Site VPN connects individual devices. VPN protocols: IPsec, SSL/TLS, L2TP. VPN use cases: remote access, branch connectivity, privacy. Reduces security risks when using public WiFi.",
+        "keywords": ["vpn", "virtual", "private", "network", "ipsec", "ssl", "tunnel", "encryption"]
+      },
+      "qos": {
+        "title": "Quality of Service (QoS)",
+        "content": "QoS prioritizes network traffic to ensure critical applications get sufficient bandwidth. Mechanisms: Classification marks traffic types. Queuing prioritizes packets. Rate limiting controls maximum bandwidth. Congestion management handles overflow. Common QoS models: DiffServ, IntServ. Useful for VoIP, video conferencing, and real-time applications requiring low latency.",
+        "keywords": ["qos", "quality", "service", "priority", "bandwidth", "traffic", "congestion"]
+      },
+      "acl": {
+        "title": "Access Control Lists (ACL)",
+        "content": "ACLs control which traffic is permitted or denied on network devices. Stateless ACLs check individual packets without context. Stateful ACLs track connection states and allow return traffic. Inbound ACLs filter traffic entering interfaces. Outbound ACLs filter traffic leaving interfaces. Ordered rules: first match wins. Critical for security policy enforcement.",
+        "keywords": ["acl", "access", "control", "list", "firewall", "rule", "permit", "deny"]
+      },
+      "arp": {
+        "title": "Address Resolution Protocol (ARP)",
+        "content": "ARP resolves Layer 3 (IP) addresses to Layer 2 (MAC) addresses. ARP request broadcasts to find MAC of target IP. ARP reply returns target's MAC. ARP cache stores known mappings. ARP spoofing attacks use false ARP replies to intercept traffic. Gratuitous ARP announces device's MAC. Port 21 reserved for ARP in many systems.",
+        "keywords": ["arp", "address", "resolution", "mac", "protocol", "broadcast", "spoof"]
+      },
+      "snmp": {
+        "title": "SNMP (Simple Network Management Protocol)",
+        "content": "SNMP monitors and manages network devices like routers, switches, printers. Agents run on managed devices, managers collect data. SNMPv1 (unsecured), SNMPv2c (community strings), SNMPv3 (secure with encryption). OIDs (Object Identifiers) reference specific data. Traps send alerts for critical events. Port 161 (queries), 162 (traps). Essential for network monitoring.",
+        "keywords": ["snmp", "management", "protocol", "monitor", "agent", "trap", "oid"]
+      },
+      "ntp": {
+        "title": "Network Time Protocol (NTP)",
+        "content": "NTP synchronizes device clocks across network within milliseconds. Stratum levels: 0 (reference), 1-15 (cascading servers). Clients query servers to sync time. Essential for security (log timestamps), network operations, Kerberos authentication. Port 123 UDP. Includes built-in authentication. Prevents time-skew attacks.",
+        "keywords": ["ntp", "time", "protocol", "synchronize", "clock", "stratum", "server"]
+      },
+      "load_balancing": {
+        "title": "Load Balancing",
+        "content": "Load balancers distribute traffic across multiple servers for performance and redundancy. Methods: Round-robin, least connections, IP hash. Layer 4 LB uses ports and protocols. Layer 7 LB examines application content. Active-passive setup has standby server. Active-active uses all servers simultaneously. Improves availability and handles traffic spikes.",
+        "keywords": ["load", "balancer", "balance", "distribution", "redundancy", "failover", "active"]
+      },
+      "clustering": {
+        "title": "Network Clustering & Failover",
+        "content": "Clustering groups servers to appear as single system. Nodes share data and automatically failover if one fails. Virtual IP (VIP) masks which node serves requests. Heartbeat monitors node health. Split-brain occurs when cluster nodes lose communication. Quorum ensures majority makes decisions. Increases availability and fault tolerance.",
+        "keywords": ["cluster", "failover", "node", "virtual", "ip", "heartbeat", "quorum"]
+      },
+      "firewalls": {
+        "title": "Firewall Types & Operation",
+        "content": "Stateless firewalls examine packets independently. Stateful firewalls track connection states. Packet-filtering firewalls work at Layer 3-4. Application-layer firewalls inspect Layer 7 content. Host-based firewalls run on individual systems. Network firewalls protect entire networks. Next-generation firewalls (NGFW) combine multiple technologies including IDS/IPS and threat detection.",
+        "keywords": ["firewall", "stateful", "stateless", "filter", "packet", "layer", "ngfw"]
+      },
+      "intrusion": {
+        "title": "IDS & IPS (Intrusion Detection/Prevention)",
+        "content": "IDS (Intrusion Detection System) monitors and alerts on suspicious activity. IPS (Intrusion Prevention System) actively blocks threats. Network-based IDS/IPS monitors network traffic. Host-based IDS/IPS monitors individual systems. Signature-based detection matches known attacks. Anomaly-based detection identifies unusual patterns. False positives are common challenge.",
+        "keywords": ["ids", "ips", "intrusion", "detection", "prevention", "alert", "signature"]
+      },
+      "encryption": {
+        "title": "Encryption & Data Security",
+        "content": "Symmetric encryption uses same key for encryption and decryption (AES, DES). Asymmetric encryption uses public and private keys (RSA). Hashing creates fixed-size fingerprint of data (MD5, SHA). SSL/TLS encrypts web traffic. IPsec encrypts IP layer traffic. Perfect Forward Secrecy ensures session keys aren't compromised if long-term key is stolen.",
+        "keywords": ["encryption", "symmetric", "asymmetric", "aes", "rsa", "hash", "ssl", "tls"]
+      },
+      "certificates": {
+        "title": "Digital Certificates & PKI",
+        "content": "Digital certificates bind public keys to identities. Issued by Certificate Authorities (CAs). X.509 standard defines certificate format. Certificate chain validates trust. CRL (Certificate Revocation List) lists revoked certificates. OCSP checks revocation status. Self-signed certificates lack CA authority. PKI (Public Key Infrastructure) manages entire certificate lifecycle.",
+        "keywords": ["certificate", "pki", "ca", "x.509", "crl", "ocsp", "revoke", "authority"]
+      },
+      "multi_factor": {
+        "title": "Multi-Factor Authentication (MFA)",
+        "content": "MFA requires multiple verification methods: something you know (password), something you have (token), something you are (biometric). Increases security significantly. TOTP (Time-based One-Time Password) uses time-synced codes. SMS codes deliver via text. Hardware keys provide strongest protection. MFA reduces account compromise risk by 99%.",
+        "keywords": ["mfa", "authentication", "factor", "totp", "password", "token", "biometric"]
+      },
+      "vlan_trunking": {
+        "title": "VLAN Trunking & Tagging",
+        "content": "VLAN tagging (802.1Q) adds VLAN ID to frames for trunk ports. Native VLAN is untagged default. Trunk ports carry multiple VLAN traffic. Access ports connect single VLAN only. VLAN hopping attacks exploit misconfiguration. Dynamic VLAN assignment uses RADIUS authentication. Management VLAN restricted for admins.",
+        "keywords": ["vlan", "tag", "trunk", "802.1q", "native", "access", "trunking"]
+      },
+      "network_segmentation": {
+        "title": "Network Segmentation & Zones",
+        "content": "Segmentation divides networks into isolated zones for security. DMZ (Demilitarized Zone) hosts public-facing servers. Internal zones for trusted users. Guest zones for visitors. Air-gapping completely isolates critical systems. Zero-trust assumes all traffic is untrusted. Reduces lateral movement if breach occurs.",
+        "keywords": ["segmentation", "zone", "dmz", "isolation", "trust", "boundary", "air-gap"]
+      },
+      "bandwidth_management": {
+        "title": "Bandwidth Management & Traffic Shaping",
+        "content": "Traffic shaping controls data flow rate to prevent network congestion. Token bucket algorithm meters traffic. Rate limiting caps maximum bandwidth. Policing discards excess packets. Bursting allows temporary overage. CBWFQ (Class-Based Weighted Fair Queuing) allocates bandwidth by class. Ensures QoS and prevents network saturation.",
+        "keywords": ["bandwidth", "traffic", "shaping", "rate", "limit", "token", "policing"]
+      },
+      "cloud_connectivity": {
+        "title": "Cloud Connectivity & Hybrid Networks",
+        "content": "Hybrid networks combine on-premises and cloud resources. ExpressRoute (Azure) and Direct Connect (AWS) provide private connections. VPN tunnels offer cost-effective alternatives. Multi-cloud setups use multiple providers. Cloud architecture considerations: latency, bandwidth, redundancy. Hybrid-cloud allows workload flexibility.",
+        "keywords": ["cloud", "hybrid", "expressroute", "direct", "connect", "vpn", "multicloud"]
+      },
+      "ipv6_transition": {
+        "title": "IPv6 & Migration Strategies",
+        "content": "IPv6 provides 128-bit addresses solving IPv4 exhaustion. Advantages: no NAT needed, autoconfiguration, improved security. Dual-stack runs IPv4 and IPv6 simultaneously. Tunneling encapsulates IPv6 in IPv4. Translation (NAT64/DNS64) enables coexistence. Challenges: legacy device support, training needs. Gradual migration recommended.",
+        "keywords": ["ipv6", "address", "migration", "dual", "stack", "tunnel", "translation"]
+      },
+      "sdn": {
+        "title": "Software-Defined Networking (SDN)",
+        "content": "SDN separates control plane from data plane. Controller manages network policies centrally. OpenFlow protocol enables communication. Provides flexibility and programmability. Simplifies network management and policy changes. Use cases: cloud data centers, network automation. Reduces dependence on proprietary hardware.",
+        "keywords": ["sdn", "software", "defined", "controller", "openflow", "policy", "plane"]
+      },
+      "iot_networks": {
+        "title": "IoT & Edge Networks",
+        "content": "IoT networks connect billions of devices with varied capabilities. Edge computing processes data locally near devices. 5G enables low-latency IoT. Mesh networks allow device-to-device communication. Security challenges: device heterogeneity, limited compute power. Protocol examples: CoAP, MQTT, Zigbee, LoRaWAN.",
+        "keywords": ["iot", "edge", "computing", "5g", "mesh", "devices", "mqtt", "protocol"]
+      }
+    }
+  }
+}

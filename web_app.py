@@ -1071,25 +1071,90 @@ def api_get_item(item_id):
     return jsonify(item), 200
 
 
+def load_specialized_content(domain):
+    """Load specialized content for a domain if it exists."""
+    # Normalize domain name for filename
+    # "CompTIA Network+" -> "network_plus_content.json"
+    domain_name = domain.replace("CompTIA ", "").lower().replace("+", "_plus").replace(" ", "_")
+    normalized = domain_name + "_content.json"
+    
+    if os.path.exists(normalized):
+        try:
+            with open(normalized, 'r') as f:
+                return json.load(f)
+        except (json.JSONDecodeError, IOError):
+            return None
+    return None
+
+
+def find_matching_topic(question, specialized_content, domain):
+    """
+    Find relevant topics in specialized content based on question keywords.
+    
+    Args:
+        question: The user's question
+        specialized_content: Loaded content dict
+        domain: The domain name
+    
+    Returns:
+        tuple: (topic_title, topic_content) or (None, None)
+    """
+    if not specialized_content or domain not in specialized_content:
+        return None, None
+    
+    question_lower = question.lower()
+    domain_topics = specialized_content[domain].get("topics", {})
+    
+    # Search for matching topics by keyword
+    best_match = None
+    best_match_count = 0
+    
+    for topic_id, topic_data in domain_topics.items():
+        keywords = topic_data.get("keywords", [])
+        match_count = sum(1 for kw in keywords if kw in question_lower)
+        
+        if match_count > best_match_count:
+            best_match = topic_data
+            best_match_count = match_count
+    
+    if best_match:
+        return best_match.get("title"), best_match.get("content")
+    return None, None
+
+
 def generate_response(question, domain):
     """
-    Generate a response based on the question and domain.
-    This is a placeholder that can be enhanced with more sophisticated logic.
+    Generate an intelligent response based on the question and domain.
+    Uses specialized content files when available (e.g., network_plus_content.json).
+    Falls back to generic domain info if specialized content unavailable.
     
     Args:
         question: The user's question
         domain: The selected domain
     
     Returns:
-        str: A response about the topic
+        str: A detailed response about the topic
     """
+    # Try to load specialized content for this domain
+    specialized_content = load_specialized_content(domain)
+    
+    if specialized_content:
+        topic_title, topic_content = find_matching_topic(question, specialized_content, domain)
+        if topic_content:
+            question_lower = question.lower()
+            # Vary response structure based on question type
+            if any(kw in question_lower for kw in ['what', 'tell', 'explain', 'define']):
+                return f"**{topic_title}**\n\n{topic_content}\n\nWould you like to know more about related topics in {domain}?"
+            elif any(kw in question_lower for kw in ['how', 'why', 'when']):
+                return f"Regarding your question about {topic_title}:\n\n{topic_content}\n\nFeel free to ask follow-up questions!"
+            else:
+                return f"That's a great question! Here's what you should know about {topic_title}:\n\n{topic_content}"
+    
+    # Fallback to generic response using domain overview
     domain_data = load_domain_data()
     domain_info = domain_data.get(domain, "")
-    
-    # Simple response generation
     question_lower = question.lower()
     
-    # Check if question contains domain keywords
     if any(keyword in question_lower for keyword in ['what', 'tell', 'explain', 'define']):
         return f"Great question! In {domain}, {domain_info.lower()} Feel free to ask more specific questions about this topic!"
     elif any(keyword in question_lower for keyword in ['how', 'why', 'when']):
