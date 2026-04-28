@@ -119,13 +119,23 @@ def update_user_last_login(user):
 # ---- end user helpers ----
 
 def load_domain_data():
-    """Load domain descriptions from JSON file."""
+    """Load domain descriptions from JSON file and normalize legacy list formats."""
     if os.path.exists(DOMAIN_DATA_FILE):
         try:
             with open(DOMAIN_DATA_FILE, 'r') as f:
-                return json.load(f)
+                data = json.load(f)
         except (json.JSONDecodeError, IOError):
             return {}
+
+        if isinstance(data, dict):
+            return data
+        if isinstance(data, list):
+            merged = {}
+            for item in data:
+                if isinstance(item, dict):
+                    merged.update(item)
+            return merged
+        return {}
     return {}
 
 
